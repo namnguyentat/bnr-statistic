@@ -31,6 +31,7 @@
       th User
       / th Group
       th Total
+      th Workout
       th Detail
       th Actions
     tbody
@@ -40,6 +41,12 @@
           td = user.name
           / td = user.groups.map(&:name).join(', ')
           td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
+          td
+            span = "week 1: #{activities.select {|a| a.week_of_month == 1}.count} wo, "
+            span = "week 2: #{activities.select {|a| a.week_of_month == 2}.count} wo, "
+            span = "week 3: #{activities.select {|a| a.week_of_month == 3}.count} wo, "
+            span = "week 4: #{activities.select {|a| a.week_of_month == 4}.count} wo, "
+            span = "week 5: #{activities.select {|a| a.week_of_month == 5}.count} wo"
           td
             button.btn.btn-sm.btn-info data-toggle="collapse" data-target="#user-#{user.id}-detail"
               | Show
