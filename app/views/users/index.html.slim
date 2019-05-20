@@ -31,7 +31,7 @@
             = link_to 'Show', user_path(user), class: 'btn btn-sm btn-info mr-3 mb-3'
             - if current_user.is_admin && user.team_bnr?
               = link_to 'Clear BNR', clear_bnr_user_path(user), method: :put, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
-            - else
+            - if !user.team_bnr?
               = link_to 'Set BNR', set_bnr_user_path(user), method: :put, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
             - if current_user.is_admin && current_user.id != user.id
               = link_to 'Delete', user_path(user), method: :delete, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
