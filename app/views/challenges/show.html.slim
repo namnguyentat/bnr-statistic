@@ -31,7 +31,6 @@
       th User
       / th Group
       th Total
-      th Workout
       th Detail
       th Actions
     tbody
@@ -42,15 +41,14 @@
           / td = user.groups.map(&:name).join(', ')
           td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
           td
-            p = "week 1: #{activities.select {|a| a.week == 1}.count} wo"
-            p = "week 2: #{activities.select {|a| a.week == 2}.count} wo"
-            p = "week 3: #{activities.select {|a| a.week == 3}.count} wo"
-            p = "week 4: #{activities.select {|a| a.week == 4}.count} wo"
-            p = "week 5: #{activities.select {|a| a.week == 5}.count} wo"
-          td
             button.btn.btn-sm.btn-info data-toggle="collapse" data-target="#user-#{user.id}-detail"
               | Show
             .collapse.pb-2.mt-3 id="user-#{user.id}-detail"
+              p = "Week 1: #{activities.select {|a| a.week == 1}.count} wo"
+              p = "Week 2: #{activities.select {|a| a.week == 2}.count} wo"
+              p = "Week 3: #{activities.select {|a| a.week == 3}.count} wo"
+              p = "Week 4: #{activities.select {|a| a.week == 4}.count} wo"
+              p = "Week 5: #{activities.select {|a| a.week == 5}.count} wo"
               - activities.each do |activity|
                 p = activity.brief_information
           td
