@@ -27,6 +27,6 @@ nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.sticky-top
           span data-feather="database"
           | Change Password
       li.nav-item
-        = link_to destroy_user_session_path, class: 'nav-link' do
+        = link_to destroy_user_session_path, class: 'nav-link', method: :delete do
           span data-feather="log-out"
           | Logout
