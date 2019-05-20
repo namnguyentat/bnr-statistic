@@ -93,7 +93,7 @@ class ChallengesController < ApplicationController
   end
 
   def join
-    if current_user.team_bnr?
+    if !current_user.team_bnr?
       flash[:alert] = 'Unauthorization'
       redirect_to root_path
       return
