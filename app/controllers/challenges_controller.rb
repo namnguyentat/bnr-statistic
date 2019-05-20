@@ -107,7 +107,7 @@ class ChallengesController < ApplicationController
 
   def quit
     @challenge = Challenge.find(params[:id])
-    Challenge.where(user: current_user, challenge: @challenge).destroy_all
+    ChallengeUserMapping.where(user: current_user, challenge: @challenge).destroy_all
     flash[:notice] = 'Quit successfully'
 
     redirect_to challenge_path(@challenge)
