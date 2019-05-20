@@ -33,7 +33,7 @@
             = link_to 'Show', challenge_path(challenge), class: 'btn btn-sm btn-info mr-3 mb-3'
             - if ChallengeUserMapping.exists?(challenge: challenge, user: current_user)
               = link_to 'Quit', quit_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-danger mr-3 mb-3'
-            - if current_user.team_bnr?
+            - if current_user.team_bnr? && !ChallengeUserMapping.exists?(challenge: challenge, user: current_user)
               = link_to 'Join', join_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-info mr-3 mb-3'
             - if current_user.is_admin
               = link_to 'Delete', challenge_path(challenge), method: :delete, class: 'btn btn-sm btn-danger mb-3', data: {confirm: 'Are you sure?'}
