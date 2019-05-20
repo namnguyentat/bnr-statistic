@@ -1,0 +1,17 @@
+ruby:
+  data = JSON.parse(@activity.data)
+
+.mb-3
+h2 Activity
+.table-responsive.mb-3
+  table.table.table-striped.table-bordered.table-sm
+    thead
+      tr
+        th Data
+    tbody
+      tr
+        td
+          - data.each do |key, value|
+            p = "#{key}: #{value}"
+div
+  = link_to 'Back', activities_path, class: 'btn btn-lg btn-info mr-3'

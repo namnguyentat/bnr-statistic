@@ -1,0 +1,28 @@
+doctype html
+html
+  head
+    title Strava Statistic
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  body
+    -if user_signed_in?
+      .container-fluid
+        = render 'layouts/header'
+        - if notice
+          .alert.alert-warning.alert-dismissible.fade.show.mt-3 role="alert"
+            = notice
+            button.close aria-label="Close" data-dismiss="alert" type="button"
+              span aria-hidden="true"  &times;
+        - if alert
+          .alert.alert-alert.alert-dismissible.fade.show.mt-3 role="alert"
+            = alert
+            button.close aria-label="Close" data-dismiss="alert" type="button"
+              span aria-hidden="true"  &times
+        = yield
+        .mt-5
+    - else
+      .container
+        = yield

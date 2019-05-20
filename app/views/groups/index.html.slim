@@ -1,0 +1,36 @@
+ruby:
+  user_group = current_user.groups.first
+
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3.border-bottom
+  h1.h2 Groups
+  .btn-toolbar.mb-2.mb-md-0
+    .btn-group.mr-2
+      - if current_user.is_admin
+        = link_to 'Add Group', new_group_path, class: 'btn btn-sm btn-outline-secondary'
+= search_form_for @q, class: 'collapse border-bottom pb-2 mb-3', id: 'advance-search' do |f|
+  = f.submit 'Submit', class: 'btn btn-primary'
+
+= render 'shared/pagination', items: @groups
+.table-responsive
+  table.table.table-striped.table-bordered.table-sm
+    thead
+      tr
+        th Name
+        th Users
+        th Count
+        th Actions
+    tbody
+      - @groups.each do |group|
+        tr
+          td = group.name
+          td = group.users.map(&:name).join(', ')
+          td = group.users.count
+          td
+            - if user_group.present? && user_group.id == group.id
+              = link_to 'Quit', quit_group_path(group), method: :post, class: 'btn btn-sm btn-danger mr-3 mb-3'
+            - if current_user.team_bnr? && user_group.blank?
+              = link_to 'Join', join_group_path(group), method: :post, class: 'btn btn-sm btn-info mr-3 mb-3'
+            - if current_user.is_admin
+              = link_to 'Edit', edit_group_path(group), class: 'btn btn-sm btn-info mr-3 mb-3'
+              = link_to 'Delete', group_path(group), method: :delete, class: 'btn btn-sm btn-danger mb-3', data: {confirm: 'Are you sure?'}
+= render 'shared/pagination', items: @groups

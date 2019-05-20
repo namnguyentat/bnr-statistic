@@ -1,0 +1,13 @@
+.mb-3
+= form_for group do |f|
+  .form-group
+    label Name
+    = f.text_field :name, class: 'form-control', required: true
+  .form-group
+    label Users
+    div
+      - User.all.each do |user|
+        .form-check
+          = f.check_box :user_ids, {multiple: true, class: 'form-check-input'}, user.id, nil
+          label.form-check-label.mr-3 = user.name
+  = f.submit 'Submit', class: 'btn btn-primary'

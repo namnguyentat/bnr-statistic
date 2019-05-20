@@ -1,0 +1,43 @@
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3.border-bottom
+  h1.h2 Users
+  .btn-toolbar.mb-2.mb-md-0
+    .btn-group.mr-2
+      button.btn.btn-sm.btn-outline-secondary data-toggle="collapse" data-target="#advance-search"
+        | Advance Search
+= search_form_for @q, class: 'collapse border-bottom pb-2 mb-3', id: 'advance-search' do |f|
+  .form-group
+    label Name or Email
+    = f.search_field :name_or_email_cont, class: 'form-control'
+  = f.submit 'Submit', class: 'btn btn-primary'
+
+= render 'shared/pagination', items: @users
+.table-responsive
+  table.table.table-striped.table-bordered.table-sm
+    thead
+      tr
+        th ID
+        th Name
+        th Email
+        td Admin
+        th Actions
+    tbody
+      - @users.each do |user|
+        tr
+          td = user.id
+          td = user.name
+          td = user.email
+          td = user.is_admin ? 'Yes' : 'No'
+          td
+            = link_to 'Show', user_path(user), class: 'btn btn-sm btn-info mr-3 mb-3'
+            - if current_user.is_admin && user.team_bnr?
+              = link_to 'Clear BNR', clear_bnr_user_path(user), method: :put, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
+            - else
+              = link_to 'Set BNR', set_bnr_user_path(user), method: :put, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
+            - if current_user.is_admin && current_user.id != user.id
+              = link_to 'Delete', user_path(user), method: :delete, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
+              - if user.is_admin
+                = link_to 'Clear Admin', clear_admin_user_path(user), method: :put, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
+              - else
+                = link_to 'Set Admin', set_admin_user_path(user), method: :put, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
+
+= render 'shared/pagination', items: @users

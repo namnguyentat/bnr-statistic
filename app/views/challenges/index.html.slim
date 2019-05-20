@@ -1,0 +1,40 @@
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3.border-bottom
+  h1.h2 Challenges
+  .btn-toolbar.mb-2.mb-md-0
+    .btn-group.mr-2
+      - if current_user.is_admin
+        = link_to 'Add Challenge', new_challenge_path, class: 'btn btn-sm btn-outline-secondary'
+= search_form_for @q, class: 'collapse border-bottom pb-2 mb-3', id: 'advance-search' do |f|
+  = f.submit 'Submit', class: 'btn btn-primary'
+
+= render 'shared/pagination', items: @challenges
+.table-responsive
+  table.table.table-striped.table-bordered.table-sm
+    thead
+      tr
+        th Name
+        th Time
+        th Detail
+        th Users
+        th Actions
+    tbody
+      - @challenges.each do |challenge|
+        tr
+          td = challenge.name
+          td = "#{challenge.start_date} - #{challenge.end_date}"
+          td
+            p = "Road distance: #{challenge.min_distance} m"
+            p = "Road pace: #{challenge.min_pace}"
+            p = "Trail distance: #{challenge.min_trail_distance} m"
+            p = "Trail pace: #{challenge.min_trail_pace}"
+            p = "Trail elevation: #{challenge.min_trail_elevation_gain} m"
+          td = challenge.users.count
+          td
+            = link_to 'Show', challenge_path(challenge), class: 'btn btn-sm btn-info mr-3 mb-3'
+            - if ChallengeUserMapping.exists?(challenge: challenge, user: current_user)
+              = link_to 'Quit', quit_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-danger mr-3 mb-3'
+            - if current_user.team_bnr?
+              = link_to 'Join', join_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-info mr-3 mb-3'
+            - if current_user.is_admin
+              = link_to 'Delete', challenge_path(challenge), method: :delete, class: 'btn btn-sm btn-danger mb-3', data: {confirm: 'Are you sure?'}
+= render 'shared/pagination', items: @challenges

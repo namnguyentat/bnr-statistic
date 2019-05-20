@@ -1,0 +1,27 @@
+.mb-3
+= form_for challenge do |f|
+  .form-group
+    label Name
+    = f.text_field :name, class: 'form-control', required: true
+  .form-group
+    label Start Date
+    = f.date_field :start_date, class: 'form-control', required: true
+  .form-group
+    label End Date
+    = f.date_field :end_date, class: 'form-control', required: true
+  .form-group
+    label Min Distance (metter)
+    = f.number_field :min_distance, class: 'form-control', required: true
+  .form-group
+    label Min Pace (min/km)
+    = f.number_field :min_pace, class: 'form-control', required: true
+  .form-group
+    label Min Trail Distance (metter)
+    = f.number_field :min_trail_distance, class: 'form-control', required: true
+  .form-group
+    label Min Trail Pace (min/km)
+    = f.number_field :min_trail_pace, class: 'form-control', required: true
+  .form-group
+    label Min Trail Elevation (metter)
+    = f.number_field :min_trail_elevation_gain, class: 'form-control', required: true
+  = f.submit 'Submit', class: 'btn btn-primary'

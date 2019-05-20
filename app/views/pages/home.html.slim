@@ -1,0 +1,7 @@
+.d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3.border-bottom
+  h1.h2 Dashboard
+
+-if current_user.strava_code.blank?
+  = link_to 'Connect Strava', Settings.strava_authorization_link, class: 'btn btn-lg btn-success'
+- else
+  = link_to 'Strava Connected', Settings.strava_authorization_link, class: 'btn btn-lg btn-success'
