@@ -1,1 +1,1 @@
-strava_authorization_link: 'https://www.strava.com/oauth/authorize?client_id=34034&response_type=code&redirect_uri=https://strava-statistic.herokuapp.com&approval_prompt=force&scope=read,activity:read'
+strava_authorization_link: 'https://www.strava.com/oauth/authorize?client_id=34034&response_type=code&redirect_uri=https://bnr-statistic.herokuapp.com&approval_prompt=force&scope=read,activity:read'
