@@ -43,8 +43,8 @@
               - activities.each do |activity|
                 p = activity.brief_information
           td
+            = link_to 'Sync', sync_data_for_user_challenge_path(@challenge, user_id: user.id), method: :post, class: 'btn btn-sm btn-info mr-3 mb-3', remote: true
             - if current_user.is_admin
-              = link_to 'Sync', sync_data_for_user_challenge_path(@challenge, user_id: user.id), method: :post, class: 'btn btn-sm btn-info mr-3 mb-3', remote: true
               = link_to 'Delete', remove_user_challenge_path(@challenge, user_id: user.id), method: :post, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
 div
   = link_to 'Back', challenges_path, class: 'btn btn-lg btn-info mr-3'
