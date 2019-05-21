@@ -18,16 +18,18 @@
 .table-responsive.mb-3
   table.table.table-striped.table-bordered.table-sm
     thead
+      th Index
       th User
       th Target
       th Total
       th Detail
       th Actions
     tbody
-      - @challenge.challenge_user_mappings.order(total: :DESC).preload(:user).each do |mapping|
+      - @challenge.challenge_user_mappings.order(total: :DESC).preload(:user).each.with_index(1) do |mapping, index|
         - user = mapping.user
         - activities = user.total_activities_in_challenge(@challenge)
         tr
+          td = index
           td = user.name
           td = mapping.target
           td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
