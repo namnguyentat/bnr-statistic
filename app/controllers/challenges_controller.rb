@@ -88,7 +88,7 @@ class ChallengesController < ApplicationController
       StravaApi.sync_data(user)
       mapping = ChallengeUserMapping.find_by(user: user, challenge: @challenge)
       mapping.update!(
-        total: user.total_activities_in_challenge.map(&:distance).sum
+        total: user.total_activities_in_challenge(@challenge).map(&:distance).sum
       )
     end
     flash[:notice] = 'Sync successfully'
@@ -102,7 +102,7 @@ class ChallengesController < ApplicationController
     StravaApi.sync_data(@user)
     mapping = ChallengeUserMapping.find_by(user: @user, challenge: @challenge)
     mapping.update!(
-      total: @user.total_activities_in_challenge.map(&:distance).sum
+      total: @user.total_activities_in_challenge(@challenge).map(&:distance).sum
     )
 
     # flash[:notice] = 'Sync successfully'
