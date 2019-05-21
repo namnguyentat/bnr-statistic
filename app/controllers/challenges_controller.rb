@@ -17,10 +17,10 @@ class ChallengesController < ApplicationController
       return
     end
     @challenge = Challenge.new(
-      min_distance: 2000,
-      min_pace: 9,
-      min_trail_distance: 2000,
-      min_trail_pace: 14
+      min_distance: 4000,
+      min_pace: 8,
+      min_trail_distance: 10_000,
+      min_trail_pace: 30
     )
   end
 
@@ -92,8 +92,29 @@ class ChallengesController < ApplicationController
     redirect_to challenge_path(@challenge)
   end
 
+  def sync_data_for_user
+    @challenge = Challenge.find(params[:id])
+    @user = User.find(params[:user_id])
+    StravaApi.sync_data(@user)
+
+    # flash[:notice] = 'Sync successfully'
+
+    # redirect_to challenge_path(@challenge)
+  end
+
+  def set_target
+    @challenge = Challenge.find(params[:id])
+    @user = User.find(params[:user_id])
+    mapping = ChallengeUserMapping.find_by(user: @user, challenge: @challenge)
+    mapping.update!(target: params[:challenge_target])
+
+    flash[:notice] = 'Update successfully'
+
+    redirect_to challenge_path(@challenge)
+  end
+
   def join
-    if !current_user.team_bnr?
+    unless current_user.team_bnr?
       flash[:alert] = 'Unauthorization'
       redirect_to root_path
       return
@@ -130,7 +151,7 @@ class ChallengesController < ApplicationController
 
   def challenge_params
     params.require(:challenge).permit(:name, :start_date, :end_date,
-      :min_distance, :min_pace, :min_trail_distance,
-      :min_trail_elevation_gain, :min_trail_pace)
+                                      :min_distance, :min_pace, :min_trail_distance,
+                                      :min_trail_elevation_gain, :min_trail_pace)
   end
 end

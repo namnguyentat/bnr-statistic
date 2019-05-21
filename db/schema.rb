@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_16_060817) do
+ActiveRecord::Schema.define(version: 2019_05_21_020253) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 2019_05_16_060817) do
     t.bigint "user_id"
     t.bigint "challenge_id"
     t.integer "target"
-    t.integer "total"
+    t.float "total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["challenge_id"], name: "index_challenge_user_mappings_on_challenge_id"

@@ -20,7 +20,9 @@ Rails.application.routes.draw do
       post 'join'
       post 'quit'
       post 'sync_data'
+      post 'sync_data_for_user'
       post 'remove_user'
+      post 'set_target'
     end
   end
   resources :groups do
