@@ -20,22 +20,24 @@ class User < ApplicationRecord
 
   def total_activities_in_challenge(challenge)
     result = activities.where(kind: 'Run')
-      .where(start_date_local: (challenge.start_date.beginning_of_day..challenge.end_date.end_of_day))
-      .order_newest.select do |activity|
-        (activity.distance >= challenge.min_distance && activity.pace <= challenge.min_pace) ||
+                       .where(start_date_local: (challenge.start_date.beginning_of_day..challenge.end_date.end_of_day))
+                       .order_newest
+    result = result.select do |activity|
+      (activity.distance >= challenge.min_distance && activity.pace <= challenge.min_pace) ||
         (activity.distance >= challenge.min_trail_distance && activity.pace <= challenge.min_trail_pace && activity.total_elevation_gain >= challenge.min_trail_elevation_gain)
+    end
+    result.select.with_index do |activity, index|
+      pre = result[index - 1]
+      if pre && pre.start_date_local.to_date = activity.to_date && pre.distance > activity.distance
+        return false
       end
-      result.select.with_index do |activity, index|
-        pre = result[index - 1]
-        if  pre && pre.start_date_local.to_date = activity.to_date && pre.distance > activity.distance
-          return false
-        end
-        pos = result[index + 1]
-        if  pos && pos.start_date_local.to_date = activity.to_date && pre.distance > activity.distance
-          return false
-        end
-        true
+
+      pos = result[index + 1]
+      if pos && pos.start_date_local.to_date = activity.to_date && pre.distance > activity.distance
+        return false
       end
+
+      true
     end
   end
 
