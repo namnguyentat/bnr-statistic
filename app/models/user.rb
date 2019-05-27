@@ -28,12 +28,12 @@ class User < ApplicationRecord
     end
     result.select.with_index do |activity, index|
       pre = result[index - 1]
-      if pre && pre.start_date_local.to_date = activity.to_date && pre.distance > activity.distance
+      if pre && pre.start_date_local.to_date == activity.to_date && pre.distance > activity.distance
         return false
       end
 
       pos = result[index + 1]
-      if pos && pos.start_date_local.to_date = activity.to_date && pre.distance > activity.distance
+      if pos && pos.start_date_local.to_date == activity.to_date && pre.distance > activity.distance
         return false
       end
 
