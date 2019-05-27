@@ -30,7 +30,7 @@ class User < ApplicationRecord
       pre = result[index - 1]
       next if pre && pre.start_date_local.to_date == activity.start_date_local.to_date && pre.distance > activity.distance
       pos = result[index + 1]
-      next if pos && pos.start_date_local.to_date == activity.start_date_local.to_date && pre.distance > activity.distance
+      next if pos && pos.start_date_local.to_date == activity.start_date_local.to_date && pos.distance > activity.distance
       true
     end
     result
