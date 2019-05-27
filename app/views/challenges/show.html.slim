@@ -36,7 +36,7 @@
           td
             button.btn.btn-sm.btn-info data-toggle="collapse" data-target="#user-#{user.id}-detail"
               | Show
-            .collapse.pb-2.mt-3 id="user-#{user.id}-detail"
+            .collapse.pb-2.mt-3 id="user-#{user.id}-detail" style="min-width: 300px"
               p = "Week 1: #{activities.select {|a| a.week == 1}.count} wo"
               p = "Week 2: #{activities.select {|a| a.week == 2}.count} wo"
               p = "Week 3: #{activities.select {|a| a.week == 3}.count} wo"
