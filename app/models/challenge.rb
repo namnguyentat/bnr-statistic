@@ -15,4 +15,8 @@ class Challenge < ApplicationRecord
   scope :order_newest, lambda {
     order(id: :DESC)
   }
+
+  def self.current_challenge
+    where('start_date >= ? AND end_date <= ?', Date.current, Date.current).first
+  end
 end

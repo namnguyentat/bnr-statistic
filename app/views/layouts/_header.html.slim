@@ -1,3 +1,6 @@
+ruby:
+  - current_challenge = Challenge.current_challenge
+
 nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.sticky-top
   button.navbar-toggler aria-controls="navbarSupportedContent" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarSupportedContent" data-toggle="collapse" type="button"
     span.navbar-toggler-icon
@@ -10,14 +13,15 @@ nav.navbar.navbar-expand-sm.bg-dark.navbar-dark.sticky-top
         = link_to activities_path, class: 'nav-link' do
           span data-feather="activity"
           | Activities
+      - if current_challenge.present?
+        li.nav-item
+          = link_to challenge_path(current_challenge), class: 'nav-link' do
+            span data-feather="activity"
+            | Current Challenge
       li.nav-item
         = link_to challenges_path, class: 'nav-link' do
           span data-feather="star"
           | Challenges
-      / li.nav-item
-      /   = link_to groups_path, class: 'nav-link' do
-      /     span data-feather="star"
-      /     | Groups
       li.nav-item
         = link_to users_path, class: 'nav-link' do
           span data-feather="users"
