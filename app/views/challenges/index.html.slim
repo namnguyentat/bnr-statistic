@@ -31,8 +31,8 @@
           td = challenge.users.count
           td
             = link_to 'Show', challenge_path(challenge), class: 'btn btn-sm btn-info mr-3 mb-3'
-            - if ChallengeUserMapping.exists?(challenge: challenge, user: current_user)
-              = link_to 'Quit', quit_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-danger mr-3 mb-3'
+            / - if ChallengeUserMapping.exists?(challenge: challenge, user: current_user)
+            /   = link_to 'Quit', quit_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-danger mr-3 mb-3'
             - if current_user.team_bnr? && !ChallengeUserMapping.exists?(challenge: challenge, user: current_user)
               = link_to 'Join', join_challenge_path(challenge), method: :post, class: 'btn btn-sm btn-info mr-3 mb-3'
             - if current_user.is_admin

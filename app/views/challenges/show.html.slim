@@ -20,30 +20,56 @@
     thead
       th Index
       th User
-      th Target
-      th Total
-      th Detail
+      th style="min-width: 50px" Target
+      th style="min-width: 50px" Total
+      th style="min-width: 50px" HM
+      th style="min-width: 50px" WO/W1
+      th style="min-width: 50px" WO/W2
+      th style="min-width: 50px" WO/W3
+      th style="min-width: 50px" WO/W4
+      th style="min-width: 50px" WO/W5
+      th style="min-width: 200px" Week 1
+      th style="min-width: 200px" Week 2
+      th style="min-width: 200px" Week 3
+      th style="min-width: 200px" Week 4
+      th style="min-width: 200px" Week 5
       th Actions
     tbody
       - @challenge.challenge_user_mappings.order(total: :DESC).preload(:user).each.with_index(1) do |mapping, index|
         - user = mapping.user
         - activities = user.total_activities_in_challenge(@challenge)
+        - hm = activties.select { |a| a.distance > 21100 }
+        - w1_wo = activities.select {|a| a.week == 1}
+        - w2_wo = activities.select {|a| a.week == 2}
+        - w3_wo = activities.select {|a| a.week == 3}
+        - w4_wo = activities.select {|a| a.week == 4}
+        - w5_wo = activities.select {|a| a.week == 5}
         tr
           td = index
           td = user.name
           td = mapping.target
           td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
+          td = hm.count - if hm.present?
+          td = w1_wo.count if w1_wo.present?
+          td = w2_wo.count if w2_wo.present?
+          td = w3_wo.count if w3_wo.present?
+          td = w4_wo.count if w4_wo.present?
+          td = w5_wo.count if w5_wo.present?
           td
-            button.btn.btn-sm.btn-info data-toggle="collapse" data-target="#user-#{user.id}-detail"
-              | Show
-            .collapse.pb-2.mt-3 id="user-#{user.id}-detail" style="min-width: 300px"
-              p = "Week 1: #{activities.select {|a| a.week == 1}.count} wo"
-              p = "Week 2: #{activities.select {|a| a.week == 2}.count} wo"
-              p = "Week 3: #{activities.select {|a| a.week == 3}.count} wo"
-              p = "Week 4: #{activities.select {|a| a.week == 4}.count} wo"
-              p = "Week 5: #{activities.select {|a| a.week == 5}.count} wo"
-              - activities.each do |activity|
-                p = activity.brief_information
+            - w1_wo.each do |activity|
+              p = activity.brief_information
+          td
+            - w2_wo.each do |activity|
+              p = activity.brief_information
+          td
+            - w3_wo.each do |activity|
+              p = activity.brief_information
+          td
+            - w4_wo.each do |activity|
+              p = activity.brief_information
+          td
+            - w5_wo.each do |activity|
+              p = activity.brief_information
           td
             = link_to 'Sync', sync_data_for_user_challenge_path(@challenge, user_id: user.id), method: :post, class: 'btn btn-sm btn-info mr-3 mb-3', remote: true
             - if current_user.is_admin
