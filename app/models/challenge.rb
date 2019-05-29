@@ -17,6 +17,6 @@ class Challenge < ApplicationRecord
   }
 
   def self.current_challenge
-    where('start_date >= ? AND end_date <= ?', Date.current, Date.current).first
+    where('end_date >= ? AND start_date <= ?', Date.current, Date.current).first
   end
 end
