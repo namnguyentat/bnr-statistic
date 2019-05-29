@@ -28,11 +28,11 @@
       th style="min-width: 50px" WO/W3
       th style="min-width: 50px" WO/W4
       th style="min-width: 50px" WO/W5
-      th style="min-width: 300px" Week 1
-      th style="min-width: 300px" Week 2
-      th style="min-width: 300px" Week 3
-      th style="min-width: 300px" Week 4
-      th style="min-width: 300px" Week 5
+      th style="min-width: 200px" Week 1
+      th style="min-width: 200px" Week 2
+      th style="min-width: 200px" Week 3
+      th style="min-width: 200px" Week 4
+      th style="min-width: 200px" Week 5
       th Actions
     tbody
       - @challenge.challenge_user_mappings.order(total: :DESC).preload(:user).each.with_index(1) do |mapping, index|

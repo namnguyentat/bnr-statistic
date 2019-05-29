@@ -22,11 +22,13 @@ class Activity < ApplicationRecord
 
   def distance_format
     return unless distance > 0
+
     "#{(distance.to_f / 1000).floor(2)} km"
   end
 
   def pace_format
     return unless kind == 'Run' && distance > 0 && moving_time > 0 && pace.present?
+
     min = pace.to_i
     sec = ((pace - min) * 60).to_i
     sec = "0#{sec}" if sec < 10
@@ -34,7 +36,7 @@ class Activity < ApplicationRecord
   end
 
   def brief_information
-    "#{start_date_local.strftime('%Y-%m-%d %H:%M')} - #{distance_format} - #{pace_format}"
+    "#{start_date_local.strftime('%d-%m')} - #{distance_format} - #{pace_format}"
   end
 
   def self.create_activity(data, user)
