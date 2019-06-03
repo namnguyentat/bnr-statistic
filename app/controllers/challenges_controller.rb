@@ -105,9 +105,9 @@ class ChallengesController < ApplicationController
       total: @user.total_activities_in_challenge(@challenge).map(&:distance).sum
     )
 
-    # flash[:notice] = 'Sync successfully'
+    flash[:notice] = 'Sync successfully'
 
-    # redirect_to challenge_path(@challenge)
+    redirect_to challenge_path(@challenge)
   end
 
   def set_target
