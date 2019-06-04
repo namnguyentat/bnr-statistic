@@ -10,6 +10,13 @@ class StravaApi
       activities.each do |activity|
         Activity.create_activity(activity, user)
       end
+      curret_challenge = Challenge.current_challenge
+      if current_challenge.present?
+        mapping = ChallengeUserMapping.find_by(user: user, challenge: curret_challenge)
+        mapping.update!(
+          total: user.total_activities_in_challenge(curret_challenge).map(&:distance).sum
+        )
+      end
     end
 
     def get_activities(user)
