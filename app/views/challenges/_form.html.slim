@@ -24,4 +24,40 @@
   .form-group
     label Min Trail Elevation (metter)
     = f.number_field :min_trail_elevation_gain, class: 'form-control', required: true
+  .form-group
+    label W1 / WO
+    = f.number_field :w1, class: 'form-control', required: true
+  .form-group
+    label W2 / WO
+    = f.number_field :w2, class: 'form-control', required: true
+  .form-group
+    label W3 / WO
+    = f.number_field :w3, class: 'form-control', required: true
+  .form-group
+    label W4 / WO
+    = f.number_field :w4, class: 'form-control', required: true
+  .form-group
+    label W5 / WO
+    = f.number_field :w5, class: 'form-control', required: true
+  .form-group
+    label W6 / WO
+    = f.number_field :w5, class: 'form-control', required: true
+  .form-group
+    label KM Money
+    = f.number_field :km_money, class: 'form-control', required: true
+  .form-group
+    label WO Money
+    = f.number_field :wo_money, class: 'form-control', required: true
+  .form-group
+    label HM Money
+    = f.number_field :hm_money, class: 'form-control', required: true
+  .form-group
+    label Users
+    ul
+      - challenge.challenge_user_mappings.each do |mapping|
+        = f.fields_for :challenge_user_mappings, mapping do |mapping_form|
+          li style="border-bottom: 1px solid #ccc; padding-bottom: 10px"
+            label = mapping.user.name
+            = mapping_form.hidden_field :id
+            = mapping_form.number_field :target, class: 'form-control'
   = f.submit 'Submit', class: 'btn btn-primary'

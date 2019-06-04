@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_21_020253) do
+ActiveRecord::Schema.define(version: 2019_06_04_020517) do
 
   create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2019_05_21_020253) do
   create_table "challenge_user_mappings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "challenge_id"
-    t.integer "target"
-    t.float "total"
+    t.integer "target", default: 0
+    t.float "total", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["challenge_id"], name: "index_challenge_user_mappings_on_challenge_id"
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 2019_05_21_020253) do
     t.datetime "updated_at", null: false
     t.date "start_date"
     t.date "end_date"
+    t.integer "w1", default: 0, null: false
+    t.integer "w2", default: 0, null: false
+    t.integer "w3", default: 0, null: false
+    t.integer "w4", default: 0, null: false
+    t.integer "w5", default: 0, null: false
+    t.integer "w6", default: 0, null: false
+    t.integer "wo_money", default: 0, null: false
+    t.integer "hm_money", default: 0, null: false
+    t.integer "km_money", default: 0, null: false
   end
 
   create_table "group_user_mappings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|

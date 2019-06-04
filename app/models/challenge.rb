@@ -4,6 +4,8 @@ class Challenge < ApplicationRecord
   has_many :challenge_user_mappings, dependent: :destroy
   has_many :users, through: :challenge_user_mappings
 
+  accepts_nested_attributes_for :challenge_user_mappings
+
   validates :name, presence: true
   validates :start_date, presence: true
   validates :end_date, presence: true
