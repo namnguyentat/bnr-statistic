@@ -54,7 +54,7 @@
   .form-group
     label Users
     ul
-      - challenge.challenge_user_mappings.each do |mapping|
+      - challenge.challenge_user_mappings.order(target: :DESC).each do |mapping|
         = f.fields_for :challenge_user_mappings, mapping do |mapping_form|
           li style="border-bottom: 1px solid #ccc; padding-bottom: 10px"
             label = mapping.user.name
