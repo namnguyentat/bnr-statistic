@@ -40,7 +40,7 @@ class User < ApplicationRecord
 
   def total_money_in_challenge(challenge, activities)
     money = 0
-    hm = activities.select { |a| a.distance > 21_100 }
+    hm = activities.select { |a| a.distance > 21_100 }.count
     w1_wo = activities.select { |a| a.week == 1 }.count
     w2_wo = activities.select { |a| a.week == 2 }.count
     w3_wo = activities.select { |a| a.week == 3 }.count
