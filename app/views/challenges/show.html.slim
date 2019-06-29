@@ -54,7 +54,11 @@ ruby:
           td = mapping.target
           td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
           - if show_money
-            td = user.total_money_in_challenge(@challenge, activities)
+            td
+
+              - money = user.total_money_in_challenge(@challenge, activities)
+              - if money.present
+                = number_to_currency(money, unit: "", separator: ".", delimiter: ",", format: "%n %u")
           td = hm.count if hm.present?
           td = w1_wo.count if w1_wo.present?
           td = w2_wo.count if w2_wo.present?
