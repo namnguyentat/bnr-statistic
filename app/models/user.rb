@@ -41,11 +41,11 @@ class User < ApplicationRecord
   def total_money_in_challenge(challenge, activities)
     money = 0
     hm = activities.select { |a| a.distance > 21_100 }
-    w1_wo = activities.select { |a| a.week == 1 }
-    w2_wo = activities.select { |a| a.week == 2 }
-    w3_wo = activities.select { |a| a.week == 3 }
-    w4_wo = activities.select { |a| a.week == 4 }
-    w5_wo = activities.select { |a| a.week == 5 }
+    w1_wo = activities.select { |a| a.week == 1 }.count
+    w2_wo = activities.select { |a| a.week == 2 }.count
+    w3_wo = activities.select { |a| a.week == 3 }.count
+    w4_wo = activities.select { |a| a.week == 4 }.count
+    w5_wo = activities.select { |a| a.week == 5 }.count
     total_km = (activities.map(&:distance).sum.to_f / 1000).floor(2)
     target = ChallengeUserMapping.find_by(user: self, challenge: challenge).try(:target).to_i
     wo_money = challenge.wo_money.to_i
