@@ -58,7 +58,7 @@ ruby:
 
               - money = user.total_money_in_challenge(@challenge, activities)
               - if money.present?
-                = number_to_currency(money, unit: "", separator: ".", delimiter: ",", format: "%n %u")
+                = number_to_currency(money, unit: "", separator: ".", delimiter: ",", format: "%n %u", precision: 0)
           td = hm.count if hm.present?
           td = w1_wo.count if w1_wo.present?
           td = w2_wo.count if w2_wo.present?
