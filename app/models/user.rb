@@ -46,7 +46,7 @@ class User < ApplicationRecord
     w3_wo = activities.select { |a| a.week == 3 }.count
     w4_wo = activities.select { |a| a.week == 4 }.count
     w5_wo = activities.select { |a| a.week == 5 }.count
-    total_km = (activities.map(&:distance).sum.to_f / 1000).floor(2)
+    total_km = (activities.map(&:distance).sum.to_f / 1000).to_i
     target = ChallengeUserMapping.find_by(user: self, challenge: challenge).try(:target).to_i
     wo_money = challenge.wo_money.to_i
     hm_money = challenge.hm_money.to_i
