@@ -63,6 +63,7 @@ class User < ApplicationRecord
     money += (w5 - w5_wo) * wo_money if w5_wo < w5
     money += hm_money if hm < 1
     money += (target - total_km) * km_money if total_km < target
+    money = 250_000 if money > 250_000
     money if money > 0
   end
 
