@@ -1,3 +1,5 @@
+ruby:
+  show_money = Time.current > @challenge.end_date - 5.days
 .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3.border-bottom
   h1.h2 Challenge
   .btn-toolbar.mb-2.mb-md-0
@@ -22,6 +24,8 @@
       th style="min-width: 150px" User
       th style="min-width: 50px" Target
       th style="min-width: 50px" Total
+      - if show_money
+        th style="min-width: 50px" Money
       th style="min-width: 50px" HM
       th style="min-width: 50px" WO/W1
       th style="min-width: 50px" WO/W2
@@ -49,6 +53,12 @@
           td = user.name
           td = mapping.target
           td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
+          - if show_money
+            td
+
+              - money = user.total_money_in_challenge(@challenge, activities)
+              - if money.present?
+                = number_to_currency(money, unit: "", separator: ".", delimiter: ",", format: "%n %u", precision: 0)
           td = hm.count if hm.present?
           td = w1_wo.count if w1_wo.present?
           td = w2_wo.count if w2_wo.present?
