@@ -1,6 +1,23 @@
 .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3.border-bottom
   h1.h2 = @user.name
 
+.table-responsive
+  table.table.table-striped.table-bordered.table-sm
+    thead
+      tr
+        th Month
+        th Distance
+        th Time
+    tbody
+      - year = Time.current.year
+      - (1..12).to_a.each do |month|
+        - activities = @user.activities.kind_run.where(year: year, month: month)
+        - if activities.present?
+          tr
+            td = month
+            td = activities.map(&:distance).sum / 1000
+            td = activities.map(&:moving_time).map(&:to_i).sum
+
 = render 'shared/pagination', items: @activities
 .table-responsive
   table.table.table-striped.table-bordered.table-sm
