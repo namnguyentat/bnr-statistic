@@ -20,6 +20,10 @@ class Activity < ApplicationRecord
     order(activity_id: :DESC)
   }
 
+  scope :kind_run, lambda {
+    where(kind: 'Run')
+  }
+
   def distance_format
     return unless distance > 0
 
