@@ -26,14 +26,16 @@ class User < ApplicationRecord
       (activity.distance >= challenge.min_distance && activity.pace <= challenge.min_pace) ||
         (activity.distance >= challenge.min_trail_distance && activity.pace <= challenge.min_trail_pace && activity.total_elevation_gain >= challenge.min_trail_elevation_gain)
     end
-    result = result.select.with_index do |activity, index|
-      pre = result[index - 1]
-      next if pre && pre.start_date_local.to_date == activity.start_date_local.to_date && pre.distance > activity.distance
+    if challenge.wo_limit
+      result = result.select.with_index do |activity, index|
+        pre = result[index - 1]
+        next if pre && pre.start_date_local.to_date == activity.start_date_local.to_date && pre.distance > activity.distance
 
-      pos = result[index + 1]
-      next if pos && pos.start_date_local.to_date == activity.start_date_local.to_date && pos.distance > activity.distance
+        pos = result[index + 1]
+        next if pos && pos.start_date_local.to_date == activity.start_date_local.to_date && pos.distance > activity.distance
 
-      true
+        true
+      end
     end
     result
   end
