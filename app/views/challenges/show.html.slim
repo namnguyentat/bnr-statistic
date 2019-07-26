@@ -28,6 +28,7 @@ ruby:
       th style="min-width: 50px" Target
       th style="min-width: 50px" Total
       th style="min-width: 50px" Level
+      th style="min-width: 50px" Convert
       - if show_money
         th style="min-width: 50px" Money
       th style="min-width: 50px" HM
@@ -52,12 +53,14 @@ ruby:
         - w3_wo = activities.select {|a| a.week == 3}
         - w4_wo = activities.select {|a| a.week == 4}
         - w5_wo = activities.select {|a| a.week == 5}
+        - total = (activities.map(&:distance).sum.to_f / 1000).floor(2)
         tr
           td = index
           td = user.name
           td = mapping.target
-          td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
+          td = total
           td = mapping.level
+          td = (total / level).floor(2)
           - if show_money
             td
 
