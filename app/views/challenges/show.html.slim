@@ -56,8 +56,8 @@ ruby:
           td = index
           td = user.name
           td = mapping.target
-          td = mapping.level
           td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
+          td = mapping.level
           - if show_money
             td
 
