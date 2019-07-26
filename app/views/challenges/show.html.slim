@@ -27,6 +27,7 @@ ruby:
       th style="min-width: 150px" User
       th style="min-width: 50px" Target
       th style="min-width: 50px" Total
+      th style="min-width: 50px" Level
       - if show_money
         th style="min-width: 50px" Money
       th style="min-width: 50px" HM
@@ -42,7 +43,7 @@ ruby:
       th style="min-width: 200px" Week 5
       th Actions
     tbody
-      - @challenge.challenge_user_mappings.order(total: :DESC).preload(:user).each.with_index(1) do |mapping, index|
+      - @challenge.challenge_user_mappings.order('total/level desc').preload(:user).each.with_index(1) do |mapping, index|
         - user = mapping.user
         - activities = user.total_activities_in_challenge(@challenge)
         - hm = activities.select { |a| a.distance > 21100 }
@@ -55,6 +56,7 @@ ruby:
           td = index
           td = user.name
           td = mapping.target
+          td = mapping.level
           td = (activities.map(&:distance).sum.to_f / 1000).floor(2)
           - if show_money
             td
