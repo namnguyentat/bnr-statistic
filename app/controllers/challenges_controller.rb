@@ -155,7 +155,7 @@ class ChallengesController < ApplicationController
       :min_distance, :min_pace, :min_trail_distance,
       :min_trail_elevation_gain, :min_trail_pace,
       :w1, :w2, :w3, :w4, :w5, :w6, :km_money, :wo_money, :hm_money,
-      challenge_user_mappings_attributes: %i[id target]
+      challenge_user_mappings_attributes: %i[id target level]
     )
   end
 end

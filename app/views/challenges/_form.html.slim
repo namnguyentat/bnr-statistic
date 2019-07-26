@@ -59,5 +59,10 @@
           li style="border-bottom: 1px solid #ccc; padding-bottom: 10px"
             label = mapping.user.name
             = mapping_form.hidden_field :id
-            = mapping_form.number_field :target, class: 'form-control'
+            div
+              lable Target
+              = mapping_form.number_field :target, class: 'form-control'
+            div
+              lable Level
+              = mapping_form.number_field :level, class: 'form-control'
   = f.submit 'Submit', class: 'btn btn-primary'
