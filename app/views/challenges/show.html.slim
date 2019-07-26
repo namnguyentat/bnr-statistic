@@ -15,7 +15,10 @@ ruby:
   .form-group
     label Target
     = number_field_tag :challenge_target, nil, class: 'form-control'
-  = submit_tag 'Submit', class: 'btn btn-primary'
+  .form-group
+    label Level
+    = number_field_tag :challenge_level, nil, class: 'form-control'
+  = submit_tag 'Submit', level: 'btn btn-primary'
 
 .table-responsive.mb-3
   table.table.table-striped.table-bordered.table-sm

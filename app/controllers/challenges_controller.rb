@@ -106,7 +106,10 @@ class ChallengesController < ApplicationController
     @challenge = Challenge.find(params[:id])
     @user = User.find(params[:user_id])
     mapping = ChallengeUserMapping.find_by(user: @user, challenge: @challenge)
-    mapping.update!(target: params[:challenge_target])
+    mapping.update!(
+      target: params[:challenge_target],
+      level: params[:challenge_level]
+    )
 
     flash[:notice] = 'Update successfully'
 
