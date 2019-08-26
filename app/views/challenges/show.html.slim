@@ -23,6 +23,30 @@ ruby:
 .table-responsive.mb-3
   table.table.table-striped.table-bordered.table-sm
     thead
+      th Min Road(Km)
+      th Min Pace(Min/Km)
+      th Min Trail(KM)
+      th Min Pace(Min/Km)
+      th Trail Elevation(M)
+      th W1
+      th W2
+      th W3
+      th W4
+      th W5
+    tbody
+      td = @challenge.min_distance
+      td = @challenge.min_pace
+      td = @challenge.min_trail_distance
+      td = @challenge.min_trail_pace
+      td = @challenge.min_trail_elevation_gain
+      td = @challenge.w1
+      td = @challenge.w2
+      td = @challenge.w3
+      td = @challenge.w4
+      td = @challenge.w5
+.table-responsive.mb-3
+  table.table.table-striped.table-bordered.table-sm
+    thead
       th Index
       th style="min-width: 150px" User
       th style="min-width: 50px" Target
