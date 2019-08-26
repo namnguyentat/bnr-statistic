@@ -27,6 +27,8 @@
         th Time
         th Distance
         th Pace
+        - if current_user.is_admin
+          th Action
     tbody
       - @activities.each do |activity|
         tr
@@ -34,4 +36,7 @@
           td = activity.start_date_local.strftime('%Y-%m-%d %H:%M')
           td = activity.distance_format
           td = activity.pace_format
+          - if current_user.is_admin
+          td
+            = link_to 'Delete', activity_path(activity), method: :delete, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
 = render 'shared/pagination', items: @activities
