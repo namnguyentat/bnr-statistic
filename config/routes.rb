@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       put 'clear_admin'
     end
   end
-  resources :activities, only: %i[index show] do
+  resources :activities, only: %i[index show destroy] do
     collection do
       post 'sync_data'
     end
