@@ -71,7 +71,7 @@ ruby:
       - @challenge.challenge_user_mappings.order('total/level desc, target desc').preload(:user).each.with_index(1) do |mapping, index|
         - user = mapping.user
         - activities = user.total_activities_in_challenge(@challenge)
-        - hm = activities.select { |a| a.distance > 21100 }
+        - hm = activities.select { |a| a.distance >= 21100 }
         - w1_wo = activities.select {|a| a.week == 1}
         - w2_wo = activities.select {|a| a.week == 2}
         - w3_wo = activities.select {|a| a.week == 3}
