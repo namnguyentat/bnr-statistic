@@ -25,6 +25,9 @@
     label Min Trail Elevation (metter)
     = f.number_field :min_trail_elevation_gain, class: 'form-control', required: true
   .form-group
+    label WO limit
+    = f.checkbox :wo_limit, class: 'form-control'
+  .form-group
     label W1 / WO
     = f.number_field :w1, class: 'form-control', required: true
   .form-group
