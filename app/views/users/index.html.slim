@@ -37,6 +37,7 @@
               = link_to 'Delete', user_path(user), method: :delete, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
               - if user.is_admin
                 = link_to 'Clear Admin', clear_admin_user_path(user), method: :put, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
+                = link_to 'Edit', edit_user_path(user), class: 'nav-link', class: 'btn btn-sm btn-danger mr-3 mb-3'
               - else
                 = link_to 'Set Admin', set_admin_user_path(user), method: :put, class: 'btn btn-sm btn-danger mr-3 mb-3', data: {confirm: 'Are you sure?'}
 
