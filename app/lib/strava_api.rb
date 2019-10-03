@@ -20,7 +20,7 @@ class StravaApi
     end
 
     def get_activities(user)
-      after = (Time.current - 30.days).to_i
+      after = (Time.current - 10.days).to_i
       url = "/api/v3/athlete/activities?after=#{after}&per_page=100"
       response = connection.get do |req|
         req.url url
