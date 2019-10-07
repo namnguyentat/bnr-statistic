@@ -37,8 +37,8 @@ class StravaApi
       response = connection.post do |req|
         req.url '/oauth/token'
         req.body = {
-          client_id: '35525',
-          client_secret: 'f778b9cb5a6dc18bb2edd19acf18c6d8095c04c7',
+          client_id: Settings.strava_client_id,
+          client_secret: Settings.strava_client_secret,
           code: user.strava_code,
           grant_type: 'authorization_code',
           scope: 'read'
@@ -59,8 +59,8 @@ class StravaApi
       response = connection.post do |req|
         req.url '/oauth/token'
         req.body = {
-          client_id: '35525',
-          client_secret: 'f778b9cb5a6dc18bb2edd19acf18c6d8095c04c7',
+          client_id: Settings.strava_client_id,
+          client_secret: Settings.strava_client_secret,
           refresh_token: user.strava_refresh_token,
           grant_type: 'refresh_token'
         }.to_json
