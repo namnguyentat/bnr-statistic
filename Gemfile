@@ -9,7 +9,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.3.1'
 gem 'coffee-rails', '~> 4.2'
 gem 'config', '~> 1.7.0'
-gem 'devise', '~> 4.6.2'
+gem 'devise', '~> 4.7.1'
 gem 'devise-bootstrap-views', '~> 1.1.0'
 gem 'enum_help', '~> 0.0.17'
 gem 'faraday', '~> 0.15.4'
