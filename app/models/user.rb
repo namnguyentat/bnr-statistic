@@ -43,11 +43,11 @@ class User < ApplicationRecord
   def total_money_in_challenge(challenge, activities)
     money = 0
     hm = activities.select { |a| a.distance >= 21_100 }.count
-    w1_wo = activities.select { |a| a.week == 1 }.count
-    w2_wo = activities.select { |a| a.week == 2 }.count
-    w3_wo = activities.select { |a| a.week == 3 }.count
-    w4_wo = activities.select { |a| a.week == 4 }.count
-    w5_wo = activities.select { |a| a.week == 5 }.count
+    w1_wo = activities.select { |a| a.week == 1 }.map(&:start_date_local).map(&:to_date).uniq.count
+    w2_wo = activities.select { |a| a.week == 2 }.map(&:start_date_local).map(&:to_date).uniq.count
+    w3_wo = activities.select { |a| a.week == 3 }.map(&:start_date_local).map(&:to_date).uniq.count
+    w4_wo = activities.select { |a| a.week == 4 }.map(&:start_date_local).map(&:to_date).uniq.count
+    w5_wo = activities.select { |a| a.week == 5 }.map(&:start_date_local).map(&:to_date).uniq.count
     total_km = (activities.map(&:distance).sum.to_f / 1000).to_i
     target = ChallengeUserMapping.find_by(user: self, challenge: challenge).try(:target).to_i
     wo_money = challenge.wo_money.to_i
@@ -64,8 +64,13 @@ class User < ApplicationRecord
     money += (w4 - w4_wo) * wo_money if w4_wo < w4
     money += (w5 - w5_wo) * wo_money if w5_wo < w5
     money += hm_money if hm < 1
-    money += (target - total_km) * km_money if total_km < target
-    money = 250_000 if money > 250_000
+    if km_money > 0
+      money += (target - total_km) * km_money if total_km < target
+    end
+    if miss_target_money > 0
+      money += miss_target_money if total_km < target
+    end
+    money = dnf_money if money > dnf_money
     money if money > 0
   end
 

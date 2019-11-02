@@ -55,6 +55,12 @@
     label HM Money
     = f.number_field :hm_money, class: 'form-control', required: true
   .form-group
+    label Miss Target Money
+    = f.number_field :miss_target_money, class: 'form-control', required: true
+  .form-group
+    label DNF Money
+    = f.number_field :dnf_money, class: 'form-control', required: true
+  .form-group
     label Users
     ul
       - challenge.challenge_user_mappings.order(target: :DESC).each do |mapping|
