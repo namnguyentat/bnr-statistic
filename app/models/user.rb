@@ -67,10 +67,10 @@ class User < ApplicationRecord
     if km_money > 0
       money += (target - total_km) * km_money if total_km < target
     end
-    if miss_target_money > 0
-      money += miss_target_money if total_km < target
+    if challenge.miss_target_money > 0
+      money += challenge.miss_target_money if total_km < target
     end
-    money = dnf_money if money > dnf_money
+    money = challenge.dnf_money if money > challenge.dnf_money
     money if money > 0
   end
 
