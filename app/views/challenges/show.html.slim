@@ -14,7 +14,7 @@ ruby:
 
 = form_tag set_target_challenge_path(@challenge, user_id: current_user.id), method: :post, class: 'collapse border-bottom pb-2 mb-3', id: 'set-target' do |f|
   .form-group
-    label = "Trung bình 3 tháng: #{tb.to_i}"
+    label = "Trung bình 3 tháng: #{tb.to_i} km"
   .form-group
     label Target
     = number_field_tag :challenge_target, nil, class: 'form-control', min: tb.to_i
