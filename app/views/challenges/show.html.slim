@@ -1,6 +1,6 @@
 ruby:
   show_money = Time.current > @challenge.end_date - 5.days
-  tb = ChallengeUserMapping.where(user: current_user).order(id: :DESC).last(3).map(&:total).sum / 3
+  tb = ChallengeUserMapping.where(user: current_user).order(id: :DESC).last(3).map(&:total).sum / 3000
 .d-flex.justify-content-between.flex-wrap.flex-md-nowrap.align-items-center.pb-2.mb-3.border-bottom
   h1.h2 Challenge
   .btn-toolbar.mb-2.mb-md-0
@@ -14,10 +14,10 @@ ruby:
 
 = form_tag set_target_challenge_path(@challenge, user_id: current_user.id), method: :post, class: 'collapse border-bottom pb-2 mb-3', id: 'set-target' do |f|
   .form-group
-    label = "Trung bình 3 tháng: #{tb}"
+    label = "Trung bình 3 tháng: #{tb.to_i}"
   .form-group
     label Target
-    = number_field_tag :challenge_target, nil, class: 'form-control', min: tb
+    = number_field_tag :challenge_target, nil, class: 'form-control', min: tb.to_i
   = submit_tag 'Submit', level: 'btn btn-primary'
 
 .table-responsive.mb-3
